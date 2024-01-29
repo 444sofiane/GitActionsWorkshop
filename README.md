@@ -12,105 +12,59 @@ Unlock the power of Git with our intermediate-level workshop, GitAction Mastery:
 ### Create a `.github/workflows` Directory
 
 ```bash
-mkdir -p .github/workflows
+mkdir .github/workflows
 ```
 
-### Create a `github_action.yml` file
+### Create a `basic_workflow.yml` file
 
-Put in the file the following content : 
-
-```yml
-name: Advanced Workflow
-
-on:
-  push:
-    branches:
-      - master
-
-jobs:
-  hello-world:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2.5.0
-        with:
-          fetch-depth: 0
-
-      - name: Print Hello World
-        run: echo "Hello, World!"
-
-  setup-node:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2.5.0
-        with:
-          fetch-depth: 0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Run Tests
-        run: npm test
-
-```
-This workflow includes two jobs: hello-world prints a simple message, and setup-node checks out the repository, sets up Node.js, installs dependencies, and runs tests.
+This workflow will include one job: hello-world prints a simple message.
 
 Ensure the workflow is triggered on each push to the master branch
 
-```bash
-git add .github/workflows/basic_workflow.yml
-git commit -m "Add basic GitHub Actions workflow"
-git push origin master
-```
+Test the workflow by pushing a random file
 
-Now, the workflow will run on each push to the master branch, performing the specified tasks.
+Hints :
+First, the workflow will checkout the repo using the action: actions/checkout@v2.5.0
 
+## 2.Test running Workflow
 
-## 2. Advanced Workflow - Additional Job Ideas
+### Create a `run_unit_tests.yml` file
 
-Here are some ideas for additional jobs that you can add to your GitHub Actions workflow for more advanced functionality:
+This workflow will include one job: run criterion unit test on a .c file
 
-### Job for Code Quality Checks
+Ensure the workflow is triggered on each push to the master branch
 
-Deploy to s3 bucket
+Hint:
+Install libcriterion using sudo apt-get install -y libcriterion-dev if your workflow runs on ubuntu-latest
 
-```yml
-additional_job_deploy_to_s3:
-  runs-on: ubuntu-latest
+### Create a `node_action.yml` file
 
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2.5.0
-      with:
-        fetch-depth: 0
+This workflow will include one job: run test on a .js file and notify on a discord channel if the tests fails
 
-    - name: Set up AWS CLI
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: 'us-east-1'
+Ensure the workflow is triggered on each push to the master branch
 
-    - name: Check Dist Directory
-      run: |
-        if [ ! -d "dist" ]; then
-          echo "Error: The 'dist' directory does not exist."
-          exit 1
-        fi
+Hints:
+First, like before, the workflow will checkout the repo using the same action
+Second, the workflow will setup node.js: actions/setup-node@v3
+Then it will install the necessary dependencies for your js project using npm install
+To notify the user if the test fails use : Ilshidur/action-discord@master
 
-    - name: Deploy to AWS S3
-      run: aws s3 sync ./dist s3://your-s3-bucket
-```
+## 3. Deployment 
 
+### Create a `push_to_docker.yml` file
 
+This workflow will include one job: containerize your js project in a docker image
 
+Ensure the workflow is triggered on each push to the master branch
 
+Hints:
+Setup docker using docker/setup-buildx-action@v1
 
+### Create a `push_to_s3.yml` file
+
+This workflow will include one job: push your js project to a s3 bucket
+
+Ensure the workflow is triggered on each push to the master branch
+
+Hints:
+Setup aws using aws-actions/configure-aws-credentials@v1
