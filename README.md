@@ -24,7 +24,7 @@ Ensure the workflow is triggered on each push to the master branch
 Test the workflow by pushing a random file
 
 Hints :
-First, the workflow will checkout the repo using the action: actions/checkout@v2.5.0
+First, the workflow will checkout the repo using the action: [Checkout repo](https://github.com/actions/checkout/tree/v2.5.0/)
 
 ## 2.Test running Workflow
 
@@ -45,9 +45,9 @@ Ensure the workflow is triggered on each push to the master branch
 
 Hints:
 First, like before, the workflow will checkout the repo using the same action
-Second, the workflow will setup node.js: actions/setup-node@v3
+Second, the workflow will setup node.js: [Node](https://github.com/actions/setup-node/tree/v3/)
 Then it will install the necessary dependencies for your js project using npm install
-To notify the user if the test fails use : Ilshidur/action-discord@master
+To notify the user if the test fails use : [Discord](https://github.com/Ilshidur/action-discord)
 
 ## 3. Deployment 
 
@@ -58,7 +58,7 @@ This workflow will include one job: containerize your js project in a docker ima
 Ensure the workflow is triggered on each push to the master branch
 
 Hints:
-Setup docker using docker/setup-buildx-action@v1
+Setup docker using: [Docker](https://github.com/docker/setup-buildx-action/tree/v1/)
 
 ### Create a `push_to_s3.yml` file
 
@@ -67,4 +67,4 @@ This workflow will include one job: push your js project to a s3 bucket
 Ensure the workflow is triggered on each push to the master branch
 
 Hints:
-Setup aws using aws-actions/configure-aws-credentials@v1
+Setup aws using : [Amazon](https://github.com/aws-actions/configure-aws-credentials/tree/v1/)
