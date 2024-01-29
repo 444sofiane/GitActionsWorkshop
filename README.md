@@ -46,6 +46,7 @@ Ensure the workflow is triggered on each push to the master branch
 Hints:
 First, like before, the workflow will checkout the repo using the same action
 Second, the workflow will setup node.js: [Node](https://github.com/actions/setup-node/tree/v3/)
+
 Then it will install the necessary dependencies for your js project using npm install
 To notify the user if the test fails use : [Discord](https://github.com/Ilshidur/action-discord)
 
